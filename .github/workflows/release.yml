@@ -1,0 +1,31 @@
+name: Release
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          java-package: jdk+fx
+      - name: Build and test
+        run: ./gradlew check developTest build
+      - name: Publish to the Maven Central Repository
+        run: ./gradlew release -PSONATYPE_USERNAME=${{ secrets.OSSRH_USERNAME }} -PSONATYPE_PASSWORD=${{ secrets.OSSRH_TOKEN }}
+        env:
+          ORG_GRADLE_PROJECT_signingKeyId: CE3BA5E0
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.GPG_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.GPG_PASSPHRASE }}
+      - name: Build and deploy docker
+        run: |
+          export VERSION=$(find . -name "MServer-*.tar.gz" | sed "s/.*MServer-\(.*\).tar.gz/\1/")
+          docker build . -t mediathekview/mserver:$VERSION -t mediathekview/mserver:latest --build-arg VERSION=$VERSION
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+          docker push mediathekview/mserver

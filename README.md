@@ -1,5 +1,5 @@
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)
-[![Build Status](https://travis-ci.org/mediathekview/MServer.svg?branch=master)](https://travis-ci.org/mediathekview/MServer)
+[![Build status](https://github.com/mediathekview/MServer/workflows/Build%20and%20test/badge.svg?branch=master)](https://github.com/mediathekview/MServer/actions?query=workflow%3A%22Build+and+test%22+branch%3Amaster)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mediathekview_MServer&metric=alert_status)](https://sonarcloud.io/dashboard?id=mediathekview_MServer)
 
 # MServer
@@ -47,7 +47,7 @@ java -jar MServer.jar
 | BR|BR-Mediathek|BR|BR||
 | DW|DW-Mediathek|DW|DW||
 | HR|HR-Mediathek|HR|HR||
-| KIKA|KIKA-Mediathek|KIKA|KIKA||
+| KIKA|KIKA-Mediathek|KIKA|KIKA|x|
 | ORF|ORF-Mediathek|ORF1, ORF2, ORF3, ORFSport|ORF|x|
 | PHOENIX|PHOENIX-Mediathek|PHOENIX|PHOENIX|x|
 | SR|SR-Mediathek|SR|SR|x|
